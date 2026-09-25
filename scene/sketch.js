@@ -10,6 +10,7 @@
 let x = 100;
 let y = 100;
 let squareSize = 90;
+let projectileSize = 20;
 let speed = 5;
 let state = "notMoving";
 
@@ -24,6 +25,7 @@ function draw() {
   player();
   movement();
   weapon();
+  shoot();
 }
 
 //Function that controls the state of the player and movement with WASD. Also takes care of if the player is touching the border.
@@ -60,9 +62,16 @@ function player() {
 function weapon() {
   fill("black");
   rect(x + 55, y + 25, squareSize - 25, squareSize/4);
+  
 }
 
-//Rotates gun based on Mouse postion
-function rotateWeapon() {
-  
+// Creates the projectile
+function shoot() {
+  if(mouseIsPressed === true) {
+    if(mouseButton.left){
+      fill("yellow");
+      circle(x + 125, y + 35, projectileSize);
+
+    }
+  }
 }
