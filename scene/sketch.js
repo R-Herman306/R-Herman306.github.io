@@ -7,11 +7,14 @@
 
 
 // Defining Global Variables
+
+const state = "NOTPLAY";
 let x = 100;
 let y = 100;
 let squareSize = 90;
 let speed = 5;
-let state = "notMoving";
+let buttonWidth = 300;
+let buttonHeight = 100;
 
 //Basic Setup Function
 async function setup() {
@@ -24,45 +27,60 @@ function draw() {
   player();
   movement();
   weapon();
+  startButton();
+  startTitle();
 }
 
 //Function that controls the state of the player and movement with WASD. Also takes care of if the player is touching the border.
 function movement() {
   if (keyIsDown("w") && y >= 0) {
     y -=speed;
-    state = "moving";
   }
   if(keyIsDown("s") && y <= windowHeight - squareSize) {
     y += speed;
-    state = "moving";
   }
   if(keyIsDown("a") && x >= 0) {
     x -= speed;
-    state = "moving";
   }
   if (keyIsDown("d") && x <= windowWidth - squareSize) {
     x += speed;
-    state = "moving";
-  }
-
-  else {
-    state = "notMoving";
   }
 }
 
 //Funtion to create player
 function player() {
-  fill("blue");
-  rect(x,y,squareSize);
+  if(state === "PLAY") {
+    fill("blue");
+    rect(x,y,squareSize);
+  }
 }
 
 //Creates the object that shoots the balls
 function weapon() {
-  fill("black");
-  rect(x + 55, y + 25, squareSize - 25, squareSize/4);
+  if(state === "PLAY") {
+    fill("black");
+    rect(x + 55, y + 25, squareSize - 25, squareSize/4);
+  }
 }
 
-//Rotates gun based on Mouse postion
-function rotateWeapon() {
-  
+//Creates start screen button
+function startButton() {
+  if (state === "NOTPLAY") {
+    fill("Black");
+    rectMode(CENTER);
+    rect(windowWidth/2, windowHeight/2 ,buttonWidth,buttonHeight );
+    fill("White");
+    textSize(30);
+    textAlign(CENTER);
+    text("Press Play", windowWidth/2,windowHeight/2);
+  }
+}
+
+//Creates start screen title
+function startTitle() {
+  if (state === "NOTPLAY") {
+    textSize(80);
+    fill("Black");
+    text("THE INTERACTIVE SCENE", windowWidth/2, 100);
+  }
 }
