@@ -10,8 +10,8 @@
 let x = 100;
 let y = 100;
 let squareSize = 90;
-let projectileSize = 20;
 let speed = 5;
+let state = "notMoving";
 
 //Basic Setup Function
 async function setup() {
@@ -24,24 +24,30 @@ function draw() {
   player();
   movement();
   weapon();
-  shoot();
 }
 
 //Function that controls the state of the player and movement with WASD. Also takes care of if the player is touching the border.
 function movement() {
   if (keyIsDown("w") && y >= 0) {
-    y -=speed;  
+    y -=speed;
+    state = "moving";
   }
-  if(keyIsDown("s") && y <= windowHeight - squareSize ) {
+  if(keyIsDown("s") && y <= windowHeight - squareSize) {
     y += speed;
+    state = "moving";
   }
-  if(keyIsDown("a") && x >= 0 ) {
-    x -= speed;   
+  if(keyIsDown("a") && x >= 0) {
+    x -= speed;
+    state = "moving";
   }
   if (keyIsDown("d") && x <= windowWidth - squareSize) {
-    x += speed;   
+    x += speed;
+    state = "moving";
   }
-  
+
+  else {
+    state = "notMoving";
+  }
 }
 
 //Funtion to create player
@@ -54,5 +60,9 @@ function player() {
 function weapon() {
   fill("black");
   rect(x + 55, y + 25, squareSize - 25, squareSize/4);
+}
 
+//Rotates gun based on Mouse postion
+function rotateWeapon() {
+  
 }
