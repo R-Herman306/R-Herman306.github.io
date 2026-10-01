@@ -8,7 +8,7 @@
 
 // Defining Global Variables
 
-const state = "NOTPLAY";
+let state = "NOTPLAY";
 let x = 100;
 let y = 100;
 let squareSize = 90;
@@ -29,6 +29,7 @@ function draw() {
   weapon();
   startButton();
   startTitle();
+  buttonClicked();
 }
 
 //Function that controls the state of the player and movement with WASD. Also takes care of if the player is touching the border.
@@ -84,3 +85,13 @@ function startTitle() {
     text("THE INTERACTIVE SCENE", windowWidth/2, 100);
   }
 }
+
+//Takes care of if the mouse is clicked on the button
+function buttonClicked() {
+  if(mouseIsPressed === true && mouseX > windowWidth/2-75 && mouseX < windowWidth/2 + buttonWidth +75 && mouseY > windowHeight/2 -50 && mouseY < windowHeight/2 + buttonHeight +50) {
+    state = "PLAY";
+
+    
+  }
+}
+console.log(mouseX);
