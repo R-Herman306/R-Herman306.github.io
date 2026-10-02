@@ -10,7 +10,7 @@
 
 let state = "NOTPLAY";
 let x = 100;
-let y = 100;
+let y = 860;
 let squareSize = 90;
 let speed = 5;
 let buttonWidth = 300;
@@ -19,6 +19,7 @@ let buttonHeight = 100;
 //Basic Setup Function
 async function setup() {
   createCanvas(windowWidth, windowHeight);
+  
 }
 
 //Basic Draw Function
@@ -30,16 +31,12 @@ function draw() {
   startButton();
   startTitle();
   buttonClicked();
+  floorRect();
+  userControls();
 }
 
-//Function that controls the state of the player and movement with WASD. Also takes care of if the player is touching the border.
+//Function that controls the state of the player and movement with AD. Also takes care of if the player is touching the border.
 function movement() {
-  if (keyIsDown("w") && y >= 0) {
-    y -=speed;
-  }
-  if(keyIsDown("s") && y <= windowHeight - squareSize) {
-    y += speed;
-  }
   if(keyIsDown("a") && x >= 0) {
     x -= speed;
   }
@@ -60,7 +57,7 @@ function player() {
 function weapon() {
   if(state === "PLAY") {
     fill("black");
-    rect(x + 55, y + 25, squareSize - 25, squareSize/4);
+    rect(x + 55, y, squareSize - 25, squareSize/4);
   }
 }
 
@@ -88,10 +85,24 @@ function startTitle() {
 
 //Takes care of if the mouse is clicked on the button
 function buttonClicked() {
-  if(mouseIsPressed === true && mouseX > windowWidth/2-75 && mouseX < windowWidth/2 + buttonWidth +75 && mouseY > windowHeight/2 -50 && mouseY < windowHeight/2 + buttonHeight +50) {
+  if(mouseIsPressed === true && mouseX > windowWidth/2-150 && mouseX < windowWidth/2 + buttonWidth +150 && mouseY > windowHeight/2 -50 && mouseY < windowHeight/2 + buttonHeight +50) {
     state = "PLAY";
 
     
   }
 }
-console.log(mouseX);
+
+//Sees what the state of the game is and makes floor for Player
+function floorRect() {
+  if(state === "PLAY") {
+    rect(0,windowHeight-18,windowWidth*300, 50);
+  }
+}
+
+function userControls() {
+  if(state === "PLAY") {
+    textSize(40);
+    text("A = Left",windowWidth- 300,windowHeight/8);
+    text("D = Right", windowWidth - 300, windowHeight/8 +50);
+  }
+}
