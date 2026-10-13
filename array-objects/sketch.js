@@ -1,4 +1,4 @@
-// Arrays and Object Notaion
+// Arrays and Object Notaion Project
 // Ryley
 // Oct 7
 //
