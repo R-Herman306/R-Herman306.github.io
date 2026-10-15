@@ -9,6 +9,8 @@ let groundX = 0;
 let groundY;
 let groundWidth;
 let groundHeight = 50;
+let playerX = 5
+let playerY = groundY + groundHeight;
 
 
 //Function to make the server for online play
@@ -34,5 +36,11 @@ function draw() {
 
 //Creates the Ground
 function ground() {
+  fill("Green");
   rect(groundX, groundY,groundWidth,groundHeight);
+}
+
+function playerBody() {
+  rect
+
 }
