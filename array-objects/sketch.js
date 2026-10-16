@@ -9,8 +9,9 @@ let groundX = 0;
 let groundY;
 let groundWidth;
 let groundHeight = 50;
-let playerX = 5
-let playerY = groundY + groundHeight;
+let playerBodyX = 5;
+let playerBodyY = groundY + groundHeight;
+let playerInfo;
 
 
 //Function to make the server for online play
@@ -41,6 +42,10 @@ function ground() {
 }
 
 function playerBody() {
-  rect
+  player = {
+    name = 
+  }
+  
+  
 
 }
