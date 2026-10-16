@@ -11,8 +11,7 @@ let groundWidth;
 let groundHeight = 50;
 let playerBodyX = 5;
 let playerBodyY = groundY + groundHeight;
-let playerInfo;
-
+let user;
 
 //Function to make the server for online play
 function preload() {
@@ -33,6 +32,7 @@ async function setup() {
 function draw() {
   //background(220);
   ground();
+  player();
 }
 
 //Creates the Ground
@@ -41,11 +41,14 @@ function ground() {
   rect(groundX, groundY,groundWidth,groundHeight);
 }
 
-function playerBody() {
-  player = {
-    name = 
-  }
-  
-  
+//Takes username from player input and picks the player colour
+function playerInfo() {
+  user =  {
+    name: '${username}', 
+    playerColour: ["green", "red", "blue", "white", "black"],
+  };
+}
 
+function player() {
+  rect(playerBodyX,playerBodyY,50,50);
 }
