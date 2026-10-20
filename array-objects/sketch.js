@@ -9,19 +9,19 @@ let groundX = 0;
 let groundY;
 let groundWidth;
 let groundHeight = 50;
+
 let playerBodyX = 5;
 let playerBodyY;
 let user;
 let playerSpeed = 5;
-
 let username = prompt("Whats your username?");
 let playerColour = prompt("Chose a colour");
 
 //Basic Setup Function
 async function setup() {
   createCanvas(windowWidth, windowHeight);
-  // await partyConnect("wss://demoserver.p5party.org", "array-objects");
-  // shared = await partyLoadMyShared("shared", {playerBodyX, playerBodyY,username,playerColour});
+  //await partyConnect("wss://demoserver.p5party.org", "array-objects");
+  //shared = await partyLoadMyShared("shared", {playerBodyX, playerBodyY,username,playerColour});
   groundY = windowHeight - groundHeight;
   groundWidth = windowWidth;
   playerBodyY = groundY - groundHeight;
@@ -32,7 +32,10 @@ function draw() {
   background(220);
   ground();
   player();
-  movement();
+  basicMovement();
+  playerInfo();
+  displayUsername();
+  jump();
 }
 
 //Creates the Ground
@@ -44,8 +47,8 @@ function ground() {
 //Takes username from player input and picks the player colour
 function playerInfo() {
   user =  {
-    name: '${username}', 
-    playerColour: '${playerColour}',
+    name: `${username}`, 
+    playerColour: `${playerColour}`,
   };
 }
 
@@ -56,14 +59,25 @@ function player() {
 }
 
 //Creates player movement
-function movement() {
+function basicMovement() {
   if (keyIsDown("a") || keyIsDown("A")) {
     playerBodyX -= playerSpeed;
   }
   if(keyIsDown("d") || keyIsDown("D")) {
     playerBodyX += playerSpeed;
   }
-
 }
 
 //Creates username above player head
+function displayUsername () {
+  fill("black");
+  text(`${username}`, playerBodyX + 17,playerBodyY - 10);
+}
+
+//Creates Jumping Mechanic
+function jump() {
+  if((keyIsDown("w") || keyIsDown("W")) && playerBodyY === groundY - groundHeight) {
+    playerBodyY += 25;
+
+  }
+}
