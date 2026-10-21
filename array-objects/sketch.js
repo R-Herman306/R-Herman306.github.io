@@ -13,15 +13,15 @@ let groundHeight = 50;
 let playerBodyX = 5;
 let playerBodyY;
 let user;
-let playerSpeed = 5;
-let username = prompt("Whats your username?");
-let playerColour = prompt("Chose a colour");
+
+
 
 //Basic Setup Function
 async function setup() {
   createCanvas(windowWidth, windowHeight);
   //await partyConnect("wss://demoserver.p5party.org", "array-objects");
   //shared = await partyLoadMyShared("shared", {playerBodyX, playerBodyY,username,playerColour});
+  playerInfo();
   groundY = windowHeight - groundHeight;
   groundWidth = windowWidth;
   playerBodyY = groundY - groundHeight;
@@ -30,12 +30,12 @@ async function setup() {
 //Basic Draw Function
 function draw() {
   background(220);
+  // playerInfo();
   ground();
   player();
   basicMovement();
-  playerInfo();
   displayUsername();
-  jump();
+  // jump();
 }
 
 //Creates the Ground
@@ -47,37 +47,47 @@ function ground() {
 //Takes username from player input and picks the player colour
 function playerInfo() {
   user =  {
-    name: `${username}`, 
-    playerColour: `${playerColour}`,
+    name: undefined, 
+    playerColour: undefined,
+    speed: 5,
+    jumpHeight: 25,
   };
+
+  user.name = prompt("Whats your Username?");
+  user.playerColour = prompt("What colour would you like?");
 }
 
 //makes the player
 function player() {
-  fill(playerColour);
+  fill(user.playerColour);
   rect(playerBodyX,playerBodyY,50,50);
 }
 
 //Creates player movement
 function basicMovement() {
   if (keyIsDown("a") || keyIsDown("A")) {
-    playerBodyX -= playerSpeed;
+    playerBodyX -= user.speed;
   }
   if(keyIsDown("d") || keyIsDown("D")) {
-    playerBodyX += playerSpeed;
+    playerBodyX += user.speed;
   }
 }
 
 //Creates username above player head
 function displayUsername () {
   fill("black");
-  text(`${username}`, playerBodyX + 17,playerBodyY - 10);
+  text(user.name, playerBodyX + 17,playerBodyY - 10);
 }
 
 //Creates Jumping Mechanic
 function jump() {
-  if((keyIsDown("w") || keyIsDown("W")) && playerBodyY === groundY - groundHeight) {
-    playerBodyY += 25;
+  if((keyIsPressed("w") || keyIsPressed("W")) && playerBodyY === groundY - groundHeight) {
+    playerBodyY += user.jumpHeight;
 
+    if (playerBodyY >= groundY - groundHeight - user.jumpHeight) {
+      while(playerBodyY !== groundY-groundHeight) {
+        playerBodyY -= 1;
+      }
+    }
   }
 }
