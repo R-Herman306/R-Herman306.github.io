@@ -14,6 +14,8 @@ let playerBodyX = 5;
 let playerBodyY;
 let user;
 
+let stepSound;
+
 
 
 //Basic Setup Function
@@ -25,6 +27,8 @@ async function setup() {
   groundY = windowHeight - groundHeight;
   groundWidth = windowWidth;
   playerBodyY = groundY - groundHeight;
+  stepSound = await loadSound("steps.wav");
+  stepSound.finish(true);
 }
 
 //Basic Draw Function
@@ -67,9 +71,11 @@ function player() {
 function basicMovement() {
   if (keyIsDown("a") || keyIsDown("A")) {
     playerBodyX -= user.speed;
+    stepSound.play();
   }
   if(keyIsDown("d") || keyIsDown("D")) {
     playerBodyX += user.speed;
+    stepSound.play();
   }
 }
 
