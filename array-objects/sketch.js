@@ -14,6 +14,9 @@ let playerBodyX = 5;
 let playerBodyY;
 let user;
 
+let velocityY = 0;
+let gravity = 0.5;
+
 let stepSound;
 
 
@@ -21,25 +24,22 @@ let stepSound;
 //Basic Setup Function
 async function setup() {
   createCanvas(windowWidth, windowHeight);
-  //await partyConnect("wss://demoserver.p5party.org", "array-objects");
-  //shared = await partyLoadMyShared("shared", {playerBodyX, playerBodyY,username,playerColour});
   playerInfo();
   groundY = windowHeight - groundHeight;
   groundWidth = windowWidth;
   playerBodyY = groundY - groundHeight;
   stepSound = await loadSound("steps.wav");
-  stepSound.finish(true);
 }
 
 //Basic Draw Function
 function draw() {
   background(220);
-  // playerInfo();
   ground();
   player();
   basicMovement();
   displayUsername();
-  // jump();
+  jump();
+  updatePlayer();
 }
 
 //Creates the Ground
@@ -54,7 +54,7 @@ function playerInfo() {
     name: undefined, 
     playerColour: undefined,
     speed: 5,
-    jumpHeight: 25,
+    jumpHeight: -15,
   };
 
   user.name = prompt("Whats your Username?");
@@ -69,13 +69,20 @@ function player() {
 
 //Creates player movement
 function basicMovement() {
-  if (keyIsDown("a") || keyIsDown("A")) {
+  if ((keyIsDown("a") || keyIsDown("A")) && playerBodyX >= 0) {
     playerBodyX -= user.speed;
-    stepSound.play();
+    if(!stepSound.isPlaying) {
+      stepSound.loop();
+
+    }
   }
-  if(keyIsDown("d") || keyIsDown("D")) {
+  
+  if((keyIsDown("d") || keyIsDown("D")) && playerBodyX <= windowWidth - 50) {
     playerBodyX += user.speed;
-    stepSound.play();
+    if(!stepSound.isPlaying) {
+      stepSound.loop();
+    }
+    
   }
 }
 
@@ -87,13 +94,22 @@ function displayUsername () {
 
 //Creates Jumping Mechanic
 function jump() {
-  if((keyIsPressed("w") || keyIsPressed("W")) && playerBodyY === groundY - groundHeight) {
-    playerBodyY += user.jumpHeight;
+  if (keyIsDown("w") && playerBodyY === groundY - groundHeight) {
+    velocityY = user.jumpHeight;
+  }
+  
+}
 
-    if (playerBodyY >= groundY - groundHeight - user.jumpHeight) {
-      while(playerBodyY !== groundY-groundHeight) {
-        playerBodyY -= 1;
-      }
-    }
+//Updates player when the Jump function happens
+function updatePlayer() {
+  if(playerBodyY !== groundY - groundHeight) {
+    velocityY += gravity;
+  }
+  
+  playerBodyY += velocityY;
+
+  if(playerBodyY >= groundY - groundHeight) {
+    playerBodyY = groundY - groundHeight;
+    velocityY = 0;
   }
 }
