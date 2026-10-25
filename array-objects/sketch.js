@@ -4,7 +4,6 @@
 //
 // Extra for Experts:
 // Collected a prompt from user and the answers affected in game states
-let shared;
 let groundX = 0;
 let groundY;
 let groundWidth;
@@ -18,6 +17,7 @@ let velocityY = 0;
 let gravity = 0.5;
 
 let stepSound;
+let spike;
 
 
 
@@ -113,3 +113,19 @@ function updatePlayer() {
     velocityY = 0;
   }
 }
+
+//Function that holds the information for the spikes
+function spikeInfo() {
+  spike = {
+  
+    x1: 50,
+    y1: playerBodyY,
+    x2: x1 + 25,
+    y2: y1 - 30,
+    x3: x2 + 25,
+    y3: playerBodyY,
+  
+  };
+
+}
+
