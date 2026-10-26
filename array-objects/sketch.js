@@ -17,7 +17,14 @@ let velocityY = 0;
 let gravity = 0.5;
 
 let stepSound;
-let spike;
+
+let spikeX;
+let spikeY;
+let spikeHeight;
+
+let theRect = [];
+
+
 
 
 
@@ -29,6 +36,7 @@ async function setup() {
   groundWidth = windowWidth;
   playerBodyY = groundY - groundHeight;
   stepSound = await loadSound("steps.wav");
+  spikeHeight = random(3,120);
 }
 
 //Basic Draw Function
@@ -40,6 +48,7 @@ function draw() {
   displayUsername();
   jump();
   updatePlayer();
+  killBlock();
 }
 
 //Creates the Ground
@@ -114,18 +123,17 @@ function updatePlayer() {
   }
 }
 
-//Function that holds the information for the spikes
-function spikeInfo() {
-  spike = {
+//Makes killboxes that the player has to hop over
+function killBlock () {
+  spikeX = 150;
+  spikeY = groundY - spikeHeight;
+  fill("red");
   
-    x1: 50,
-    y1: playerBodyY,
-    x2: x1 + 25,
-    y2: y1 - 30,
-    x3: x2 + 25,
-    y3: playerBodyY,
-  
-  };
+  for(let spikeX = 150; spikeX <= windowWidth - 400; spikeX += 150) {
+    rect(spikeX, spikeY, 50, spikeHeight);
 
+  }
 }
+
+//Checks collsion from players and killboxes
 
