@@ -13,10 +13,11 @@
 - [Randomized Art](art)
 - [Images and Sound fx](loading-assets)
 - [Grid Demo](grid)
-
+- [Rectagular Grid](rectangle)
 ## Projects
 
 - [Interactive Scene](scene)
 - [Arrays and Object Notation](array-objects)
+- [2D Arrays](2d-arrays)
  
     
