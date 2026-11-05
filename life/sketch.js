@@ -5,7 +5,7 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-const CELL_SIZE = 50;
+const CELL_SIZE = 90;
 const RENDER_ON_MULTIPLES_OF = 5;
 let rows;
 let cols;

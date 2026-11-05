@@ -14,6 +14,7 @@
 - [Images and Sound fx](loading-assets)
 - [Grid Demo](grid)
 - [Rectagular Grid](rectangle)
+- [Game of Life](life)
 ## Projects
 
 - [Interactive Scene](scene)
