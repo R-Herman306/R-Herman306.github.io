@@ -5,7 +5,7 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-const CELL_SIZE = 100;
+const CELL_SIZE = 150;
 const OPEN_TILE = 0;
 const IMPASSABLE = 1;
 const PLAYER = 9;
