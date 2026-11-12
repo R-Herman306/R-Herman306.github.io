@@ -2,7 +2,7 @@
 // Ryley Herman
 // October 29, 2026
 //
-//Idea : Minesweeper Variant
+//See how fast you can make all squares black
 //
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
