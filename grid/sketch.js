@@ -62,9 +62,7 @@ function randomizeGrid(cols, rows) {
 
 function mousePressed() {
   let x = Math.floor(mouseX/cellSize);
-  let y = Math.floor(mouseY / cellSize);
-
-  console.log(x, y);
+  let y = Math.floor(mouseY/cellSize);
 
   toggleCell(x,y);
 }
