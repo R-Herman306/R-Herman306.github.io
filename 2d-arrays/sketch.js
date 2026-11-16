@@ -7,19 +7,23 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
+//Global variables and constants
 const SQUARE_DIMENSIONS = 10;
 let grid;
 let cellSize;
+let timer = 0;  
 
 //Setup function that holds grid size and displays grid
 async function setup() {
-  createCanvas(windowWidth, windowHeight);
   if (width < height) {
-    cellSize = width / SQUARE_DIMENSIONS;
+    cellSize = windowWidth * 0.85 / SQUARE_DIMENSIONS;
   }
   else {
-    cellSize = height / SQUARE_DIMENSIONS;
+    cellSize = windowHeight * 0.85 / SQUARE_DIMENSIONS;
   }
+
+  let canvas = createCanvas( SQUARE_DIMENSIONS * cellSize , SQUARE_DIMENSIONS * cellSize);
+  canvas.parent('container');
   grid = randomizeGrid(SQUARE_DIMENSIONS, SQUARE_DIMENSIONS);
 }
 
@@ -44,7 +48,7 @@ function showGrid() {
   }
 }
 
-
+//Function used to randomly place black and white squares
 function randomizeGrid(cols, rows) {
   let newGrid = [];
   for (let y = 0; y < rows; y++) {
@@ -61,7 +65,7 @@ function randomizeGrid(cols, rows) {
   return newGrid;
 }
 
-
+// Calculates where the mosue is and handles changing of colours
 function mousePressed() {
   let x = Math.floor(mouseX/cellSize);
   let y = Math.floor(mouseY/cellSize);
@@ -69,7 +73,7 @@ function mousePressed() {
   toggleCell(x,y);
 }
 
-
+// Changes squares from black to white
 function toggleCell(x,y) {
   if(grid[y][x] === 1) {
     grid[y][x] = 0;
