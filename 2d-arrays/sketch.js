@@ -62,6 +62,11 @@ function randomizeGrid(cols, rows) {
       }
     }
   }
+  for(rows of grid) {
+    for( cols of rows) {
+      if (cols === 1 )
+    }
+  }
   return newGrid;
 }
 
@@ -84,3 +89,8 @@ function toggleCell(x,y) {
   }
 }
 
+//Timer function
+function timeToFinish() {
+
+}
+  

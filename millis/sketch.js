@@ -26,10 +26,10 @@ function swapStateIfNeeded() {
   if(millis() > lastSwapTime + waitTime) {
     lastSwapTime = millis();
     if (state === "red") {
-      state = "black"
+      state = "black";
     }
     else if (state === "black") {
-      state = "red"
+      state = "red";
     }
   }
 }
