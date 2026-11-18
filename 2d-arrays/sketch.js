@@ -11,7 +11,7 @@
 const SQUARE_DIMENSIONS = 10;
 let grid;
 let cellSize;
-let timer = 0;  
+let timer;
 
 //Setup function that holds grid size and displays grid
 async function setup() {
@@ -31,6 +31,8 @@ async function setup() {
 function draw() {
   background(220);
   showGrid();
+  countingColors();
+  displayTimer();
 }
 
 // Displays grid with the variable dimensions
@@ -62,11 +64,8 @@ function randomizeGrid(cols, rows) {
       }
     }
   }
-  for(rows of grid) {
-    for( cols of rows) {
-      if (cols === 1 )
-    }
-  }
+
+  
   return newGrid;
 }
 
@@ -89,8 +88,29 @@ function toggleCell(x,y) {
   }
 }
 
-//Timer function
-function timeToFinish() {
+//Checks each box on the grid to ensure there all black
+function countingColors() {
+  for(let rows of grid) {
+    for(let cols of rows) {
+      if(cols === 0) {
+        return false;
+      }
+    }
+  }
+  return true;
 
+}
+
+function timeToFinish() {
+  while(countingColors(true)) {
+    timer = millis() / 1000;
+
+  }
+}
+
+function displayTimer() {
+  fill("Black");
+  text(`${timer}`, 100, 50);
+  
 }
   
