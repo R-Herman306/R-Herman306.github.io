@@ -31,7 +31,7 @@ async function setup() {
 function draw() {
   background(220);
   showGrid();
-  countingColors();
+  timeToFinish();
   displayTimer();
 }
 
@@ -102,15 +102,16 @@ function countingColors() {
 }
 
 function timeToFinish() {
-  while(countingColors(true)) {
-    timer = millis() / 1000;
+  let filled = countingColors();
+  if (!filled) {
+    timer = round(millis() / 1000, 2);
 
   }
 }
 
 function displayTimer() {
   fill("Black");
-  text(`${timer}`, 100, 50);
+  text(`${timer}`, 2, 60);
   
 }
   
