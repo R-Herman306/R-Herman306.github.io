@@ -7,11 +7,22 @@
 // Extra for Experts:
 // - describe what you did to take this project "above and beyond"
 
-//Global variables and constants
+//GLOBAL VARIABLES AND CONSTANTS
+
+//Grid Variables
 const SQUARE_DIMENSIONS = 10;
 let grid;
 let cellSize;
+
+//Timer Variables
+let timerNumber;
+let finishedTime;
 let timer;
+let filled;
+let timerDone = false;
+
+//Description
+let gameDescription;
 
 //Setup function that holds grid size and displays grid
 async function setup() {
@@ -24,7 +35,15 @@ async function setup() {
 
   let canvas = createCanvas( SQUARE_DIMENSIONS * cellSize , SQUARE_DIMENSIONS * cellSize);
   canvas.parent('container');
+
   grid = randomizeGrid(SQUARE_DIMENSIONS, SQUARE_DIMENSIONS);
+
+  timer = createP(`${timerNumber}`);
+  timer.position(100, 50);
+  timer.style('font-size', '50px');
+
+  gameDescription = createP("Race your friends to fill all squares black! Personal record time is 14.20");
+  gameDescription.position(100, 100);
 }
 
 //Draw loop with needed functions
@@ -64,8 +83,6 @@ function randomizeGrid(cols, rows) {
       }
     }
   }
-
-  
   return newGrid;
 }
 
@@ -73,7 +90,7 @@ function randomizeGrid(cols, rows) {
 function mousePressed() {
   let x = Math.floor(mouseX/cellSize);
   let y = Math.floor(mouseY/cellSize);
-
+  
   toggleCell(x,y);
 }
 
@@ -82,7 +99,6 @@ function toggleCell(x,y) {
   if(grid[y][x] === 1) {
     grid[y][x] = 0;
   }
-
   else if (grid [y][x] === 0) {
     grid[y][x] = 1;
   }
@@ -98,20 +114,26 @@ function countingColors() {
     }
   }
   return true;
-
 }
 
+//Sets timer to millis and stop timer when grid is all black
 function timeToFinish() {
-  let filled = countingColors();
-  if (!filled) {
-    timer = round(millis() / 1000, 2);
-
+  filled = countingColors();
+  if (!filled && !timerDone) {
+    timerNumber = round(millis() / 1000, 2); 
+  }
+  else {
+    finishedTime = timerNumber;
+    timerDone = true;
   }
 }
 
+//Displays the timer in the corner
 function displayTimer() {
-  fill("Black");
-  text(`${timer}`, 2, 60);
-  
+  fill("white");
+  timer.html(`${timerNumber}`);
+  if(timerDone) {
+    timerNumber = finishedTime;
+  }
 }
   
