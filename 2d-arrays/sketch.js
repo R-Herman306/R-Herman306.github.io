@@ -5,7 +5,7 @@
 //See how fast you can make all squares black   
 //
 // Extra for Experts:
-// - describe what you did to take this project "above and beyond"
+// - Played with CSS of the website to change text sizes and change lettering to be bold
 
 //GLOBAL VARIABLES AND CONSTANTS
 
@@ -23,6 +23,7 @@ let timerDone = false;
 
 //Description
 let gameDescription;
+let record;
 
 //Setup function that holds grid size and displays grid
 async function setup() {
@@ -38,12 +39,20 @@ async function setup() {
 
   grid = randomizeGrid(SQUARE_DIMENSIONS, SQUARE_DIMENSIONS);
 
+  //Text for displaying timer
   timer = createP(`${timerNumber}`);
   timer.position(100, 50);
   timer.style('font-size', '50px');
 
-  gameDescription = createP("Race your friends to fill all squares black! Personal record time is 14.20");
-  gameDescription.position(100, 100);
+  //Text for game description
+  gameDescription = createP("Race your friends to fill all squares black!");
+  gameDescription.position(100,250 );
+
+  //Text for personal record
+  record = createP("Personal record time is 14.20")
+  record.position(100,270);
+  record.style('font-size', '20px');
+  record.style('font-weight', 'bold');
 }
 
 //Draw loop with needed functions
@@ -52,6 +61,7 @@ function draw() {
   showGrid();
   timeToFinish();
   displayTimer();
+  retry();
 }
 
 // Displays grid with the variable dimensions
@@ -114,6 +124,7 @@ function countingColors() {
     }
   }
   return true;
+  playing = false;
 }
 
 //Sets timer to millis and stop timer when grid is all black
@@ -136,4 +147,11 @@ function displayTimer() {
     timerNumber = finishedTime;
   }
 }
-  
+
+//Switch up the grid and reset timer
+function retry() {
+  if(keyIsDown('r')) {
+    randomizeGrid();
+    
+  }
+}
