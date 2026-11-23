@@ -20,10 +20,12 @@ let finishedTime;
 let timer;
 let filled;
 let timerDone = false;
+let startTime = 0;
 
 //Description
 let gameDescription;
 let record;
+let reset; 
 
 //Setup function that holds grid size and displays grid
 async function setup() {
@@ -49,10 +51,15 @@ async function setup() {
   gameDescription.position(100,250 );
 
   //Text for personal record
-  record = createP("Personal record time is 14.20")
+  record = createP("Ryley's record time is 12.13")
   record.position(100,270);
   record.style('font-size', '20px');
   record.style('font-weight', 'bold');
+
+  //Text For Reset Instructions
+  reset = createP("Click " + " r" + " to reset");
+  reset.position(100, 305);
+  reset.style('font-size', "15px");
 }
 
 //Draw loop with needed functions
@@ -61,7 +68,6 @@ function draw() {
   showGrid();
   timeToFinish();
   displayTimer();
-  retry();
 }
 
 // Displays grid with the variable dimensions
@@ -131,7 +137,7 @@ function countingColors() {
 function timeToFinish() {
   filled = countingColors();
   if (!filled && !timerDone) {
-    timerNumber = round(millis() / 1000, 2); 
+    timerNumber = round((millis() - startTime) / 1000, 2); 
   }
   else {
     finishedTime = timerNumber;
@@ -149,9 +155,10 @@ function displayTimer() {
 }
 
 //Switch up the grid and reset timer
-function retry() {
-  if(keyIsDown('r')) {
-    randomizeGrid();
-    
+function keyPressed() {
+  if(key === 'r' || key === 'R') {
+    grid = randomizeGrid(SQUARE_DIMENSIONS, SQUARE_DIMENSIONS);
+    timerDone = false;
+    startTime = millis();
   }
 }
