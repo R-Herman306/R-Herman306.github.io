@@ -51,7 +51,7 @@ async function setup() {
   gameDescription.position(100,250 );
 
   //Text for personal record
-  record = createP("Ryley's record time is 12.13")
+  record = createP("Ryley's record time is 12.13");
   record.position(100,270);
   record.style('font-size', '20px');
   record.style('font-weight', 'bold');
